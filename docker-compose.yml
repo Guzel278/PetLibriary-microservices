@@ -1,0 +1,13 @@
+version: '3.4'
+
+services:
+ libriarydb:
+    image: mongo
+ libriary.api:
+    image: ${DOCKER_REGISTRY-}libriaryapi
+    build:
+      context: .
+      dockerfile: Services/Libriary/Libriary.API/Dockerfile
+
+volumes:
+  mongo_data:

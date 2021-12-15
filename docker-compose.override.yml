@@ -1,0 +1,21 @@
+version: '3.4'
+
+services:
+  libriarydb:
+    container_name: libriarydb
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  libriary.api:
+    container_name: libriary.api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "DatabaseSettings:ConnectionString=mongodb://catalogdb:27017"
+    depends_on:
+      - libriarydb
+    
+    ports:
+      - "8000:80"
